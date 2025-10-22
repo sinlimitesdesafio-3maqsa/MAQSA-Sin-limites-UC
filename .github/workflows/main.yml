@@ -22,8 +22,8 @@ jobs:
           cache: 'pip'
       - name: Instalar dependencias
         run: pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib pandas
-      - name: Crear credenciales desde secreto
-        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" | base64 --decode > credentials.json
+      - name: Crear archivo de credenciales
+        run: echo "${{ secrets.PROYECTO_CONSOLIDADO_K }}" > directed-graph.json
       
       - name: Ejecutar script
         run: python intento_google_sheet.py
