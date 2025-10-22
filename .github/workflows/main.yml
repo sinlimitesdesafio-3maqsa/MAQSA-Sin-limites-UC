@@ -4,7 +4,7 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: '35 0 ***'
+    - cron: '35 0 * * *'
 
 jobs:
   run-data-pipeline:
@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: checkout repo content
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.PROYECTO_CONSOLIDADO_K }}
+#        with:
+#          token: ${{ secrets.PROYECTO_CONSOLIDADO_K }}
 
       - name: Configurar Python
         uses: actions/setup-python@v5
@@ -22,8 +22,13 @@ jobs:
           cache: 'pip'
       - name: Instalar dependencias
         run: pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib pandas
+      - name: Crear credenciales desde secreto
+        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" | base64 --decode > credentials.json
+      
       - name: Ejecutar script
         run: python intento_google_sheet.py
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: credentials.json
 #      - name: Chequear por cambios
 #        id: git-check
 #        run:
