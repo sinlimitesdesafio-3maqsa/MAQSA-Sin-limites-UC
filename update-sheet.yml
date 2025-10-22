@@ -1,0 +1,31 @@
+name: data-workflow
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '35 0 ***'
+
+jobs:
+  run-data-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PROYECTO_CONSOLIDADO_K }}
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - name: Instalar dependencias
+        run: pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib pandas
+      - name: Ejecutar script
+        run: python intento_google_sheet.py
+#      - name: Chequear por cambios
+#        id: git-check
+#        run:
+#          git config user.name 'github-actions'
+
