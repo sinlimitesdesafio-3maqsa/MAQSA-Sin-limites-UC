@@ -23,7 +23,11 @@ jobs:
       - name: Instalar dependencias
         run: pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib pandas
       - name: Crear archivo de credenciales
-        run: echo "${{ secrets.PROYECTO_CONSOLIDADO_K }}" > directed-graph.json
+        run: |
+         echo -e "${{ secrets.GOOGLE_CREDENTIALS_JSON }}" > directed-graph.json
+
+      - name: Ejecutar script
+        run: python intento_google_sheet.py
       
       - name: Ejecutar script
         run: python intento_google_sheet.py
