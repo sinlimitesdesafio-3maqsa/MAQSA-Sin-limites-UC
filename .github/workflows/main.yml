@@ -13,7 +13,7 @@ jobs:
       - name: checkout repo content
         uses: actions/checkout@v4
 #        with:
-#          token: ${{ secrets.PROYECTO_CONSOLIDADO_K }}
+#          token: ${{ secrets.PROYECTO_CONSOLIDADO_K2 }}
 
       - name: Configurar Python
         uses: actions/setup-python@v5
@@ -24,7 +24,7 @@ jobs:
         run: pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib pandas
       - name: Crear archivo de credenciales
         run: |
-         echo -e "${{ secrets.PROYECTO_CONSOLIDADO_K }}" > directed-graph.json
+         echo -e "${{ secrets.PROYECTO_CONSOLIDADO_K2 }}" > directed-graph.json
 
       - name: Ejecutar script
         run: python intento_google_sheet.py
