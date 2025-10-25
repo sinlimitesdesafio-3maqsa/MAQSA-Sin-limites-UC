@@ -10,30 +10,26 @@ jobs:
   run-data-pipeline:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo content
+      - name: Checkout repo
         uses: actions/checkout@v4
-#        with:
-#          token: ${{ secrets.PROYECTO_CONSOLIDADO_K }}
 
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
+
       - name: Instalar dependencias
-        run: pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib pandas
+        run: |
+          pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib pandas
+
       - name: Crear archivo de credenciales
         run: |
-         echo -e "${{ secrets.PROYECTO_CONSOLIDADO_K }}" > directed-graph.json
+          echo '${{ secrets.GOOGLE_CREDENTIALS }}' > credentials.json
 
       - name: Ejecutar script
-        run: python intento_google_sheet.py
-      
-      - name: Ejecutar script
-        run: python intento_google_sheet.py
         env:
           GOOGLE_APPLICATION_CREDENTIALS: credentials.json
-#      - name: Chequear por cambios
-#        id: git-check
-#        run:
+        run: python intento_google_sheet.py
+
 #          git config user.name 'github-actions'
