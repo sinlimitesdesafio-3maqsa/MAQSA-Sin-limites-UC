@@ -14,6 +14,7 @@ creds = service_account.Credentials.from_service_account_file(
 # ID de tu Google Sheet
 SPREADSHEET_ID = '1kAJF7-Orahudiusk3tDo5fV9VDFYlEYTFuKyBMuUcJw'
 RANGE_NAME = 'Consolidados Proyecciones!A:F'
+OUTPUT_FILE =  "proyecciones_filtradas.xlsx"
 
 service = build('sheets', 'v4', credentials=creds)
 sheet = service.spreadsheets()
@@ -48,3 +49,4 @@ df_filtrado.to_excel(OUTPUT_FILE, index=False)
 print(f"✅ Archivo generado: {OUTPUT_FILE}")
 print("📘 Última fila:")
 print(df_filtrado.tail(1))
+
