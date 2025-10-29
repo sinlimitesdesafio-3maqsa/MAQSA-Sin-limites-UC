@@ -33,5 +33,9 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS: credentials.json
         run: python intento_google_sheet.py
-
-#          git config user.name 'github-actions'
+      
+      - name: Upload Excel result
+        uses: actions/upload-artifact@v4
+        with:
+          name: proyecciones-filtradas
+          path: proyecciones_filtradas.xlsx
